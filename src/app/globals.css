@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  #printDetails,
+  #printDetails * {
+    visibility: visible;
+  }
+
+  #printDetails {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
