@@ -13,7 +13,7 @@ export default function Home() {
     }
   };
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between md:p-24 sm:p-16 xs:p-10">
+    <main className="flex min-h-screen flex-col items-center  md:p-24 sm:p-16 xs:p-10">
       <Form onSubmit={onFormSubmit} />
     </main>
   );

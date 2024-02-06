@@ -3,17 +3,27 @@
 import { useState } from "react";
 import Card from "./Card";
 import PDFDown from "./PDFDown";
+import Image from "next/image";
 
 export default function Form({ onSubmit }) {
   const [data, setData] = useState({ items: [] });
+  const [isError, setIsError] = useState(false);
+
   const onFormSubmit = async (e) => {
     e.preventDefault();
     const input = document.getElementById("nic");
     const val = input.value;
     const dataJson = await onSubmit(val);
-    setData(dataJson);
-    console.log(dataJson);
+    if (dataJson?.items) {
+      setIsError(false);
+      setData(dataJson);
+    } else {
+      if (dataJson?.status === 0) {
+        setIsError(true);
+      }
+    }
   };
+
   return (
     <>
       <form className="flex items-center px-4 pt-12" onSubmit={onFormSubmit}>
@@ -56,18 +66,28 @@ export default function Form({ onSubmit }) {
           Search
         </button>
       </form>
-      <div className="mb-8"></div>
-      <PDFDown data={data} />
-      <div className="mb-8"></div>
-      <ul
-        role="list"
-        className="grid grid-cols-1 gap-6 sm:grid-cols-1 lg:grid-cols-2 w-full"
-        id="printDetails"
-      >
-        {data.items.map((voterData) => (
-          <Card data={voterData} key={voterData.name} />
-        ))}
-      </ul>
+      {isError && (
+        <div className="h-full mt-10">
+          <h2>The NIC number does not exist in NA246.</h2>
+        </div>
+      )}
+      {!isError && data?.items && (
+        <>
+          <div className="mb-8"></div>
+          <PDFDown data={data} />
+          <div className="mb-8"></div>
+          <ul
+            role="list"
+            className="grid grid-cols-1 gap-6 sm:grid-cols-1 lg:grid-cols-2 w-full"
+            id="printDetails"
+          >
+            {!isError &&
+              data.items.map((voterData) => (
+                <Card data={voterData} key={voterData.name} />
+              ))}
+          </ul>
+        </>
+      )}
     </>
   );
 }
