@@ -15,8 +15,8 @@ export default function Form({ onSubmit }) {
     console.log(dataJson);
   };
   return (
-    <div className="pt-12">
-      <form className="flex items-center px-4" onSubmit={onFormSubmit}>
+    <>
+      <form className="flex items-center px-4 pt-12" onSubmit={onFormSubmit}>
         <label htmlFor="nic" className="sr-only">
           Search
         </label>
@@ -68,6 +68,6 @@ export default function Form({ onSubmit }) {
           <Card data={voterData} key={voterData.name} />
         ))}
       </ul>
-    </div>
+    </>
   );
 }
