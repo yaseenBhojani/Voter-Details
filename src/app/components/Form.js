@@ -16,7 +16,7 @@ export default function Form({ onSubmit }) {
   };
   return (
     <div className="pt-12">
-      <form className="flex items-center" onSubmit={onFormSubmit}>
+      <form className="flex items-center px-4" onSubmit={onFormSubmit}>
         <label htmlFor="nic" className="sr-only">
           Search
         </label>
