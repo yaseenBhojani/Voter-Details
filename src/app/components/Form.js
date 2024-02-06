@@ -8,20 +8,23 @@ import Image from "next/image";
 export default function Form({ onSubmit }) {
   const [data, setData] = useState({ items: [] });
   const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onFormSubmit = async (e) => {
     e.preventDefault();
+    setIsError(false);
+    setIsLoading(true);
     const input = document.getElementById("nic");
     const val = input.value;
     const dataJson = await onSubmit(val);
     if (dataJson?.items) {
-      setIsError(false);
       setData(dataJson);
     } else {
       if (dataJson?.status === 0) {
         setIsError(true);
       }
     }
+    setIsLoading(false);
   };
 
   return (
@@ -66,6 +69,12 @@ export default function Form({ onSubmit }) {
           Search
         </button>
       </form>
+      {isLoading && (
+        <div
+          class="w-12 h-12 mt-8 rounded-full animate-spin
+                    border-2 border-solid border-black border-t-transparent"
+        ></div>
+      )}
       {isError && (
         <div className="h-full mt-10">
           <h2>The NIC number does not exist in NA246.</h2>
