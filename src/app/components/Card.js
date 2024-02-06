@@ -110,9 +110,9 @@ export default function Card({ data }) {
       </div>
       <div className="flex w-full items-center justify-between space-x-6 p-6">
         <div className="flex-1 truncate">
-          <div className="flex items-center justify-between space-x-3 flex-row-reverse">
-            <p className="text-gray-900 text-[12px] font-bold">پولنگ سٹیشن</p>
-            <p className="text-[12px] font-bold">
+          <div className="flex items-center justify-between flex-wrap overflow-visible space-x-3 flex-row-reverse">
+            <p className="text-gray-900 text-[12px] font-bold">:پولنگ سٹیشن</p>
+            <p className="text-[12px] font-bold text-wrap">
               {data.pollingStationName} - {data.pollingStationNo}
             </p>
           </div>
